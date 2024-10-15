@@ -183,11 +183,10 @@ def process_movie(record: dict, api_key: str) -> dict:
     record_id = first_doc.get('pnx', {}).get('control', {}).get('recordid', ['No Record ID'])[0]
     link = f"https://utdallas.primo.exlibrisgroup.com/discovery/fulldisplay?docid={record_id}&context=L&vid=01UT_DALLAS:UTDALMA&lang=en"
 
-    # Prepend the link to the record and remove 'plot_embedding'
+    # Prepare the augmented record with the library link included
     augmented_record = {'library_link': link}
     for key, value in record.items():
-        if key != 'plot_embedding':
-            augmented_record[key] = value
+        augmented_record[key] = value
 
     return augmented_record
 
